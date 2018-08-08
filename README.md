@@ -37,3 +37,7 @@ __返回参数说明：__
 | endTime | Number | 结束日期的毫秒数 |
 | overdueDay | Number | 超期天数，如果没有超期为 0 天 |
 | finishPer | String | 已完成百分之多少 |
+
+## 效果
+
+![](https://ws1.sinaimg.cn/large/006d7zD3gy1fu22sibjqqj325c1a6tja.jpg)
