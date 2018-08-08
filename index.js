@@ -2,7 +2,7 @@
  * @Author: guotq
  * @Date: 2018-08-03 16:07:12
  * @Last Modified by: guotq
- * @Last Modified time: 2018-08-08 10:02:29
+ * @Last Modified time: 2018-08-08 10:32:52
  * @Description: 甘特图数据
  */
 
@@ -43,7 +43,12 @@
                     var item = list[i],
                         overdueDay = item.overdueDay,
                         endTime = item.endTime,
-                        overduePer = '';
+                        overduePer = '',
+                        startTime = item.startTime;
+
+                    // 如果接口返回的 startTime 或者 endTime 不是毫秒数的话，而是日期 '2018-3-1' 类似这样的，需要自己转换
+                    startTime = typeof startTime !== 'number' ? new Date(startTime).getTime() : startTime;
+                    endTime = typeof endTime !== 'number' ? new Date(endTime).getTime() : endTime;
 
                     // 如果超期时间，endTime要延长
                     if (overdueDay) {
