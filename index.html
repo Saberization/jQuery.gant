@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=IE8">
+    <link href="./css/style.css" type="text/css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            padding: 0 0 50px 0;
+        }
+
+        .contain {
+            width: 98%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 40px 0 20px 0;
+        }
+
+        table th:first-child {
+            width: 150px;
+        }
+
+        .tips {
+            text-align: center;
+        }
+
+        .tips em {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+        }
+
+        .tips .finish {
+            background: #00c186;
+        }
+
+        .tips .overdue {
+            background: #da1f00;
+        }
+
+        .tips .default {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contain">
+        <h1>甘特图</h1>
+
+        <div class="gantt"></div>
+        <div class="tips">
+            开始时间
+            <em class="finish"></em>
+            已完成
+            <em class="default"></em>
+            剩余时间
+            <em class="overdue"></em>
+            已超期
+        </div>
+    </div>
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.extend.gant.js" charset="GB2312"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
