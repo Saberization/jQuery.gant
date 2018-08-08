@@ -2,7 +2,7 @@
  * @Author: guotq
  * @Date: 2018-08-03 16:07:12
  * @Last Modified by: guotq
- * @Last Modified time: 2018-08-08 10:32:52
+ * @Last Modified time: 2018-08-08 10:37:35
  * @Description: 甘特图数据
  */
 
@@ -70,7 +70,6 @@
                     });
                 }
 
-                console.log(result);
                 // 渲染Gant
                 renderGant(result);
             }
