@@ -856,13 +856,18 @@
                                                     element.scrollNavigation.scrollerMouseDown = true;
                                                     core.sliderScroll(element, e);
 
-                                                    
+                                                    document.onmousemove = function(e) {
+                                                        if (element.scrollNavigation.scrollerMouseDown) {
+                                                            core.sliderScroll(element, e);
+                                                        }
+                                                    };
                                                 })
-                                                .mousemove(function (e) {
-                                                    if (element.scrollNavigation.scrollerMouseDown) {
-                                                        core.sliderScroll(element, e);
-                                                    }
-                                                })
+                                                // TODO: 原先滑动不灵活，重写滑动
+                                                // .mousemove(function (e) {
+                                                //     if (element.scrollNavigation.scrollerMouseDown) {
+                                                //         core.sliderScroll(element, e);
+                                                //     }
+                                                // })
                                             )
                                         )
                             .append($('<div class="nav-slider-right" />')
