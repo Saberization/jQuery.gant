@@ -821,19 +821,20 @@
                                     .click(function () {
                                         core.navigateTo(element, 'now');
                                     }))
-                                .append($('<button type="button" class="nav-link nav-prev-week"/>')
-                                    .html('&lt;&lt;')
-                                    .click(function () {
-                                        if (settings.scale === 'hours') {
-                                            core.navigateTo(element, tools.getCellSize() * 8);
-                                        } else if (settings.scale === 'days') {
-                                            core.navigateTo(element, tools.getCellSize() * 30);
-                                        } else if (settings.scale === 'weeks') {
-                                            core.navigateTo(element, tools.getCellSize() * 12);
-                                        } else if (settings.scale === 'months') {
-                                            core.navigateTo(element, tools.getCellSize() * 6);
-                                        }
-                                    }))
+                                // TODO: 去掉上一周
+                                // .append($('<button type="button" class="nav-link nav-prev-week"/>')
+                                //     .html('&lt;&lt;')
+                                //     .click(function () {
+                                //         if (settings.scale === 'hours') {
+                                //             core.navigateTo(element, tools.getCellSize() * 8);
+                                //         } else if (settings.scale === 'days') {
+                                //             core.navigateTo(element, tools.getCellSize() * 30);
+                                //         } else if (settings.scale === 'weeks') {
+                                //             core.navigateTo(element, tools.getCellSize() * 12);
+                                //         } else if (settings.scale === 'months') {
+                                //             core.navigateTo(element, tools.getCellSize() * 6);
+                                //         }
+                                //     }))
                                 .append($('<button type="button" class="nav-link nav-prev-day"/>')
                                     .html('&lt;')
                                     .click(function () {
@@ -884,19 +885,20 @@
                                             core.navigateTo(element, tools.getCellSize() * -3);
                                         }
                                     }))
-                            .append($('<button type="button" class="nav-link nav-next-week"/>')
-                                    .html('&gt;&gt;')
-                                    .click(function () {
-                                        if (settings.scale === 'hours') {
-                                            core.navigateTo(element, tools.getCellSize() * -8);
-                                        } else if (settings.scale === 'days') {
-                                            core.navigateTo(element, tools.getCellSize() * -30);
-                                        } else if (settings.scale === 'weeks') {
-                                            core.navigateTo(element, tools.getCellSize() * -12);
-                                        } else if (settings.scale === 'months') {
-                                            core.navigateTo(element, tools.getCellSize() * -6);
-                                        }
-                                    }))
+                                    // TODO: 去掉下一周
+                            // .append($('<button type="button" class="nav-link nav-next-week"/>')
+                            //         .html('&gt;&gt;')
+                            //         .click(function () {
+                            //             if (settings.scale === 'hours') {
+                            //                 core.navigateTo(element, tools.getCellSize() * -8);
+                            //             } else if (settings.scale === 'days') {
+                            //                 core.navigateTo(element, tools.getCellSize() * -30);
+                            //             } else if (settings.scale === 'weeks') {
+                            //                 core.navigateTo(element, tools.getCellSize() * -12);
+                            //             } else if (settings.scale === 'months') {
+                            //                 core.navigateTo(element, tools.getCellSize() * -6);
+                            //             }
+                            //         }))
                                     )
                                 );
                     $(document).mouseup(function () {
@@ -923,11 +925,12 @@
                             .click(function () {
                                 core.navigateTo(element, 'begin');
                             }))
-                        .append($('<button type="button" class="nav-link nav-prev-week"/>')
-                            .html('&lt;&lt;')
-                            .click(function () {
-                                core.navigateTo(element, tools.getCellSize() * 7);
-                            }))
+                            // TODO: 去掉上一周
+                        // .append($('<button type="button" class="nav-link nav-prev-week"/>')
+                        //     .html('&lt;&lt;')
+                        //     .click(function () {
+                        //         core.navigateTo(element, tools.getCellSize() * 7);
+                        //     }))
                         .append($('<button type="button" class="nav-link nav-prev-day"/>')
                             .html('&lt;')
                             .click(function () {
@@ -943,11 +946,12 @@
                             .click(function () {
                                 core.navigateTo(element, tools.getCellSize() * -1);
                             }))
-                        .append($('<button type="button" class="nav-link nav-next-week"/>')
-                            .html('&gt;&gt;')
-                            .click(function () {
-                                core.navigateTo(element, tools.getCellSize() * -7);
-                            }))
+                        // TODO: 去掉下一周
+                        // .append($('<button type="button" class="nav-link nav-next-week"/>')
+                        //     .html('&gt;&gt;')
+                        //     .click(function () {
+                        //         core.navigateTo(element, tools.getCellSize() * -7);
+                        //     }))
                         .append($('<button type="button" class="nav-link nav-end"/>')
                             .html('&gt;&#124;')
                             .click(function () {
@@ -1707,14 +1711,14 @@
 
             // Get the current cell height TODO: 这里修改过源代码
             getCellSize: function () {
-                if (typeof tools._getCellSize === "undefined") {
-                    // var measure = $('<div style="display: none; position: absolute;" class="fn-gantt"><div class="row.test"></div></div>');
-                    // $("body").append(measure);
-                    // tools._getCellSize = measure.find(".row").height();
-                    tools._getCellSize = 24;
-                    // measure.empty().remove();
+                if (!tools._getCellSize) {
+                    $("body").append(
+                        $('<div style="display: none; position: absolute;" class="fn-gantt" id="measureCellWidth"><div class="row"></div></div>')
+                    );
+                    tools._getCellSize = $("#measureCellWidth .row").height();
+                    $("#measureCellWidth").empty().remove();
                 }
-                return tools._getCellSize;
+                return tools._getCellSize || 24;
             },
 
             // Get the current page height
