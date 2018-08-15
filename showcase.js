@@ -2,7 +2,7 @@
  * @Author: guotq
  * @Date: 2018-08-03 16:07:12
  * @Last Modified by: guotq
- * @Last Modified time: 2018-08-08 10:37:35
+ * @Last Modified time: 2018-08-15 13:50:21
  * @Description: 甘特图数据
  */
 
@@ -26,6 +26,7 @@
             minScale: "days",
             maxScale: "months",
             waitText: '加载中...',
+            allYear: false,
             months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
         });
     };
@@ -65,7 +66,7 @@
                             label: item.finishPer,
                             customClass: 'default',
                             overduePer: overduePer,
-                            finishPer: item.finishPer
+                            elapsedTime: item.elapsedTime
                         }]
                     });
                 }

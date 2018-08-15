@@ -237,13 +237,13 @@
 }
 
 .fn-gantt .overdue,
-.fn-gantt .finish {
+.fn-gantt .elapsed {
     position: absolute;
     top: 0;
     height: 100%;
 }
 
-.fn-gantt .finish {
+.fn-gantt .elapsed {
     left: 0;
     background-color: #00c186;
 }
@@ -253,7 +253,7 @@
     background-color: #da1f00;
 }
 
-.fn-gantt .finish .fn-label {
+.fn-gantt .elapsed .fn-label {
     color: #333 !important;
 }
 
