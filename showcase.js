@@ -2,7 +2,7 @@
  * @Author: guotq
  * @Date: 2018-08-03 16:07:12
  * @Last Modified by: guotq
- * @Last Modified time: 2018-08-16 09:35:44
+ * @Last Modified time: 2018-08-16 15:12:01
  * @Description: 甘特图数据
  */
 
@@ -22,11 +22,8 @@
         $(".gantt").gantt({
             source: data,
             navigate: "scroll",
-            scale: "weeks",
-            minScale: "days",
-            maxScale: "months",
+            scale: "days",
             waitText: '加载中...',
-            allYear: false,
             months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
         });
     };
@@ -45,13 +42,9 @@
                         overdueDay = item.overdueDay,
                         overdueMilliseconds,
                         endDate = item.endDate,
-                        overduePer = '',
-                        elapsedPer = '',
                         startTimeMilliseconds,
                         endTimeMilliseconds,
-                        elapsedDate = item.elapsedDate,
-                        startDate = item.startDate,
-                        intervalMilliseconds;
+                        startDate = item.startDate;
 
                     // 如果接口返回的 startTime 或者 endTime 不是毫秒数的话，而是日期 '2018-3-1' 类似这样的，需要自己转换
                     startTimeMilliseconds = typeof startDate !== 'number' ? new Date(startDate).getTime() : startDate;
@@ -61,12 +54,7 @@
                     if (overdueDay) {
                         overdueMilliseconds = getMilliseconds(overdueDay);
                         endTimeMilliseconds = endTimeMilliseconds + overdueMilliseconds;
-                        intervalMilliseconds = endTimeMilliseconds - startTimeMilliseconds;
-                        
-                        overduePer = getPer(overdueMilliseconds, intervalMilliseconds);
                     }
-
-                    elapsedPer = getPer(getMilliseconds(elapsedDate), intervalMilliseconds);
 
                     result.push({
                         name: item.name,
@@ -75,8 +63,8 @@
                             to: getDateTime(endTimeMilliseconds),
                             label: item.finishPer,
                             customClass: 'default',
-                            overduePer: overduePer,
-                            elapsedPer: elapsedPer
+                            overdueWidth: overdueDay * 24 + 'px',
+                            elapsedWidth: item.elapsedDay * 24 + 'px'
                         }]
                     });
                 }
@@ -92,12 +80,8 @@
      * @param {Number}} day 天数
      * @returns {Number} 对应天数的毫秒数
      */
-    var getMilliseconds = function(day) {
+    var getMilliseconds = function (day) {
         return day * 24 * 60 * 60 * 1000;
-    };
-
-    var getPer = function(milliseconds, intervalMilliseconds) {
-        return (milliseconds / intervalMilliseconds).toFixed(2) * 100 + '%';
     };
 
     // 获取 Gant 数据

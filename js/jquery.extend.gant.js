@@ -194,7 +194,6 @@
             scale: "days",
             maxScale: "months",
             minScale: "hours",
-            allYear: true,
             // callbacks
             onItemClick: function (data) { return; },
             onAddClick: function (dt, rowId) { return; },
@@ -713,28 +712,16 @@
                     range = tools.parseDateRange(element.dateStart, element.dateEnd);
                     dataPanelWidth = range.length * tools.getCellSize();
 
-                    var dateBefore = ktkGetNextDate(range[0], -1);
-                    year = dateBefore.getFullYear();
-                    month = dateBefore.getMonth();
+                    // var dateBefore = ktkGetNextDate(range[0], -1);
+                    // year = dateBefore.getFullYear();
+                    month = 0;
                     //day = dateBefore; // <- never used?
 
                     for (i = 0, len = range.length; i < len; i++) {
                         rday = range[i];
 
-                        // Fill years
-                        if (rday.getFullYear() !== year) {
-                            yearArr.push(
-                                '<div class="row year" style="width:' +
-                                tools.getCellSize() * scaleUnitsThisYear +
-                                'px;"><div class="fn-label">' +
-                                year +
-                                '</div></div>');
-                            year = rday.getFullYear();
-                            scaleUnitsThisYear = 0;
-                        }
                         scaleUnitsThisYear++;
 
-                        // Fill months
                         if (rday.getMonth() !== month) {
                             monthArr.push(
                                 '<div class="row month" style="width:' +
@@ -745,6 +732,7 @@
                             month = rday.getMonth();
                             scaleUnitsThisMonth = 0;
                         }
+
                         scaleUnitsThisMonth++;
 
                         day = rday.getDay();
@@ -770,7 +758,7 @@
                     yearArr.push(
                         '<div class="row year" style="width: ' +
                         tools.getCellSize() * scaleUnitsThisYear + 'px;"><div class="fn-label">' +
-                        year +
+                        rday.getFullYear() +
                         '</div></div>');
 
                     // Last month
@@ -963,7 +951,7 @@
 
             // **Progress Bar** TODO:
             // Return an element representing a progress of position within the entire chart
-            createProgressBar: function (label, desc, classNames, dataObj, overduePer, elapsedPer) {
+            createProgressBar: function (label, desc, classNames, dataObj, overdueWidth, elapsedWidth) {
                 var $rowheader = $('.leftPanel').find('#rowheader' + idx++);
 
                 leftPanelHeight += $rowheader.outerHeight();
@@ -994,13 +982,13 @@
                 }
 
                 // 已经过时间，显示为绿色
-                if (elapsedPer) {
-                    bar.append('<div class="elapsed" style="width: ' + elapsedPer +'"></div>');
+                if (elapsedWidth) {
+                    bar.append('<div class="elapsed" style="width: ' + elapsedWidth +'"></div>');
                 }
                 
                 // 处理超时，显示为红色
-                if (overduePer) {
-                    bar.append('<div class="overdue" style="width: ' + overduePer +'"></div>');
+                if (overdueWidth) {
+                    bar.append('<div class="overdue" style="width: ' + overdueWidth +'"></div>');
                 }
 
                 bar.click(function (e) {
@@ -1070,7 +1058,7 @@
                                 cTo = to.data("offset");
                                 dl = Math.floor((cTo - cFrom) / cellWidth) + 1;
                                 dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
-                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedPer);
+                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overdueWidth, day.elapsedWidth);
 
                                 // find row
                                 topEl = $(element).find("#rowheader" + i);
@@ -1097,7 +1085,7 @@
                                 cTo = to.data("offset");
                                 dl = Math.round((cTo - cFrom) / cellWidth) + 1;
                                 dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
-                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedPer);
+                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overdueWidth, day.elapsedWidth);
                                 // find row
                                 topEl = $(element).find("#rowheader" + i);
                                 top = cellWidth * 3 + barOffset + topEl.data("offset");
@@ -1135,7 +1123,7 @@
                                 cTo = to.data("offset");
                                 dl = Math.round((cTo - cFrom) / cellWidth) + 1;
                                 dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
-                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedPer);
+                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overdueWidth, day.elapsedWidth);
                                 
                                 // find row
                                 topEl = $(element).find("#rowheader" + i);
@@ -1161,7 +1149,7 @@
                                 cFrom = from.data("offset");
                                 dl = Math.floor((dTo - dFrom) / UTC_DAY_IN_MS) + 1;
                                 dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
-                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedPer);
+                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overdueWidth, day.elapsedWidth);
                                 
                                 // find row
                                 topEl = $(element).find("#rowheader" + i);
@@ -1480,16 +1468,7 @@
                     maxDate.setHours(maxDate.getHours() + element.scaleStep * 3);
                     break;
                 case "weeks":
-                    if (settings.allYear) {
-                        bd = new Date(maxDate.getTime());
-                        bd = new Date(bd.setDate(bd.getDate() + 3 * 7));
-                    }
-                    else {
-                        bd = new Date(new Date().getFullYear() + '-12-31');
-                    }
-                    
-                    var md = Math.floor(bd.getDate() / 7) * 7;
-                    maxDate = new Date(bd.getFullYear(), bd.getMonth(), md === 0 ? 4 : md - 3);
+                    maxDate = new Date(new Date().getFullYear() + '-12-31');
                     break;
                 case "months":
                     bd = new Date(maxDate.getFullYear(), maxDate.getMonth(), 1);
@@ -1499,9 +1478,11 @@
                 case "days":
                     /* falls through */
                 default:
+                    maxDate.setMonth(11);
                     maxDate.setHours(0);
-                    maxDate.setDate(maxDate.getDate() + 3);
+                    maxDate.setDate(31);
                 }
+
                 return maxDate;
             },
 
@@ -1523,13 +1504,7 @@
                 case "weeks":
                     var bd = new Date(minDate.getTime());;
 
-                    // wtf is happening here?
-                    if (settings.allYear) {
-                        bd = new Date(bd.setDate(bd.getDate() - 3 * 7));
-                    }
-
-                    var md = Math.floor(bd.getDate() / 7) * 7;
-                    minDate = new Date(bd.getFullYear(), bd.getMonth(), md === 0 ? 4 : md - 3);
+                    minDate = new Date(bd.getFullYear(), 0, 1);
                     break;
                 case "months":
                     minDate.setHours(0, 0, 0, 0);
@@ -1540,7 +1515,8 @@
                     /* falls through */
                 default:
                     minDate.setHours(0, 0, 0, 0);
-                    minDate.setDate(minDate.getDate() - 3);
+                    minDate.setMonth(0);
+                    minDate.setDate(1);
                 }
                 return minDate;
             },
