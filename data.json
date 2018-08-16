@@ -1,27 +1,17 @@
 {
     "list": [{
             "name": "合物片院型",
-            "startTime": 1514736000000,
-            "endTime": 1518192000000,
-            "overdueDay": 10,
-            "finishPer": "35%",
-            "elapsedTime": "30%"
-        },
-        {
-            "name": "眼直处毛济",
-            "startTime": 1520179200000,
-            "endTime": 1528128000000,
+            "startDate": "2018-1-1",
+            "endDate": "2018-1-20",
+            "overdueDay": 5,
+            "finishPer": "50%",
+            "elapsedDate": 19
+        }, {
+            "name": "标题二",
+            "startDate": "2018-3-1",
+            "endDate": "2018-5-10",
             "overdueDay": 0,
-            "finishPer": "100%",
-            "elapsedTime": "30%"
-        },
-        {
-            "name": "象基员越素",
-            "startTime": 1531152000000,
-            "endTime": 1539129600000,
-            "overdueDay": 3,
-            "finishPer": "95%",
-            "elapsedTime": "30%"
-        }
-    ]
+            "finishPer": "50%",
+            "elapsedDate": 19
+        }]
 }

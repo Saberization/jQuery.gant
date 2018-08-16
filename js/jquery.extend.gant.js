@@ -963,7 +963,7 @@
 
             // **Progress Bar** TODO:
             // Return an element representing a progress of position within the entire chart
-            createProgressBar: function (label, desc, classNames, dataObj, overduePer, elapsedTime) {
+            createProgressBar: function (label, desc, classNames, dataObj, overduePer, elapsedPer) {
                 var $rowheader = $('.leftPanel').find('#rowheader' + idx++);
 
                 leftPanelHeight += $rowheader.outerHeight();
@@ -994,8 +994,8 @@
                 }
 
                 // 已经过时间，显示为绿色
-                if (elapsedTime) {
-                    bar.append('<div class="elapsed" style="width: ' + elapsedTime +'"></div>');
+                if (elapsedPer) {
+                    bar.append('<div class="elapsed" style="width: ' + elapsedPer +'"></div>');
                 }
                 
                 // 处理超时，显示为红色
@@ -1070,7 +1070,7 @@
                                 cTo = to.data("offset");
                                 dl = Math.floor((cTo - cFrom) / cellWidth) + 1;
                                 dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
-                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedTime);
+                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedPer);
 
                                 // find row
                                 topEl = $(element).find("#rowheader" + i);
@@ -1097,7 +1097,7 @@
                                 cTo = to.data("offset");
                                 dl = Math.round((cTo - cFrom) / cellWidth) + 1;
                                 dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
-                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedTime);
+                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedPer);
                                 // find row
                                 topEl = $(element).find("#rowheader" + i);
                                 top = cellWidth * 3 + barOffset + topEl.data("offset");
@@ -1135,7 +1135,7 @@
                                 cTo = to.data("offset");
                                 dl = Math.round((cTo - cFrom) / cellWidth) + 1;
                                 dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
-                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedTime);
+                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedPer);
                                 
                                 // find row
                                 topEl = $(element).find("#rowheader" + i);
@@ -1161,7 +1161,7 @@
                                 cFrom = from.data("offset");
                                 dl = Math.floor((dTo - dFrom) / UTC_DAY_IN_MS) + 1;
                                 dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
-                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedTime);
+                                _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overduePer, day.elapsedPer);
                                 
                                 // find row
                                 topEl = $(element).find("#rowheader" + i);
