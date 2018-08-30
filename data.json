@@ -1,24 +1,17 @@
 {
     "list": [{
-            "name": "少时诵诗书所所所所所所所所",
-            "startDate": "2018-08-07",
-            "endDate": "2018-08-10",
-            "overdueDay": 6,
-            "finishPer": "50%",
-            "elapsedDay": 3
-        }, {
-            "name": "是的是的色二二二二二二二二二",
-            "startDate": "2018-08-07",
-            "endDate": "2018-12-10",
-            "overdueDay": 0,
-            "finishPer": "30%",
-            "elapsedDay": 9
-        }, {
-            "name": "少时诵诗书所所所所所多,",
-            "startDate": "2018-08-07",
-            "endDate": "2018-10-01",
-            "overdueDay": 0,
-            "finishPer": "85%",
-            "elapsedDay": 9
-        }]
+        "name": "节点一",
+        "startDate": "2018-04-01",
+        "endDate": "2018-08-01",
+        "overdueDay": 29,
+        "finishPer": "40%",
+        "elapsedDay": 122
+    }, {
+        "name": "节点二",
+        "startDate": "2018-10-01",
+        "endDate": "2018-11-30",
+        "overdueDay": 0,
+        "finishPer": "40%",
+        "elapsedDay": 0
+    }]
 }

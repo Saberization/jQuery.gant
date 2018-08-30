@@ -2,7 +2,7 @@
  * @Author: guotq
  * @Date: 2018-08-03 16:07:12
  * @Last Modified by: guotq
- * @Last Modified time: 2018-08-16 15:12:01
+ * @Last Modified time: 2018-08-17 10:35:15
  * @Description: 甘特图数据
  */
 
@@ -22,7 +22,7 @@
         $(".gantt").gantt({
             source: data,
             navigate: "scroll",
-            scale: "days",
+            scale: "weeks",
             waitText: '加载中...',
             months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
         });
@@ -63,8 +63,8 @@
                             to: getDateTime(endTimeMilliseconds),
                             label: item.finishPer,
                             customClass: 'default',
-                            overdueWidth: overdueDay * 24 + 'px',
-                            elapsedWidth: item.elapsedDay * 24 + 'px'
+                            overdueWidth: overdueDay * 24,
+                            elapsedWidth: item.elapsedDay * 24
                         }]
                     });
                 }
