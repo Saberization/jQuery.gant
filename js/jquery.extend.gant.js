@@ -1081,7 +1081,7 @@
                                     cTo = to.data("offset");
                                     dl = Math.round((cTo - cFrom) / cellWidth) + 1;
                                     dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
-                                    _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, parseInt(day.overdueWidth, 10) / 4, parseInt(day.elapsedWidth, 10) / 8);
+                                    _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, parseInt(day.overdueWidth, 10) / 4, parseInt(day.elapsedWidth, 10) / 7);
 
                                     // find row
                                     topEl = $(element).find("#rowheader" + i);
