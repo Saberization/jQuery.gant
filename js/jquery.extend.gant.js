@@ -1061,9 +1061,8 @@
                             var _bar;
                             var from, to, cFrom, cTo, dFrom, dTo, dl, dp;
                             var elapsedDay, elapsedDaydTo, elapsedDayTo, elapsedDaycTo, elapsedDayDl, elapsedDayDp;
-                            var overdueDay, overdueDaydTo, overdueDayTo, overdueDaycTo, overdueDayDl, overdueDayDp;
                             var topEl, top;
-                            var _elapsedBar;
+                            var _elapsedBar, _overdueBar;
                             switch (settings.scale) {
                                 // **Weekly data**
                                 case "weeks":
@@ -1085,6 +1084,9 @@
                                     top = leftPanelHeight[i] + spacerHeight - leftRowHeight / 2 - 9;
                                     top = (beforeSwitchScale && beforeSwitchScale == 'days') ? top - 12 : top;
 
+                                    var $div = $('<div></div>'),
+                                        $label = $('<div class="processlabel">'+ (day.label || '') +'</div>');
+
                                     if (day.elapsedDay) {
                                         elapsedDay = +dFrom + day.elapsedDay * 24 * 60 * 60 * 1000;
                                         elapsedDaydTo = tools.dateDeserialize('/Date(' + elapsedDay + ')/');
@@ -1099,10 +1101,25 @@
                                             left: Math.floor(cFrom),
                                             width: elapsedDayDp + '%'
                                         });
+
+                                        $div.append(_elapsedBar);
                                     }
 
                                     if (day.overdueDay) {
+                                        var overdueDaydFrom = elapsedDaydTo,
+                                            overdueDayFrom = $(element).find("#" + overdueDaydFrom.getWeekId()),
+                                            overdueDaycFrom = overdueDayFrom.data("offset"),
+                                            overdueDayDl = Math.round((cTo - overdueDaycFrom) / cellWidth) + 1,
+                                            overdueDayDp = 100 * (cellWidth * overdueDayDl - 1) / dataPanelWidth;
 
+                                        _overdueBar = $('<div class="overdue"></div>');
+                                        _overdueBar.css({
+                                            top: top,
+                                            left: Math.floor(overdueDaycFrom),
+                                            width: overdueDayDp + '%'
+                                        });
+
+                                        $div.append(_overdueBar);
                                     }
 
                                     _bar.css({
@@ -1110,9 +1127,6 @@
                                         left: Math.floor(cFrom),
                                         width: dp + '%'
                                     });
-
-                                    var $div = $('<div></div>');
-                                    var $label = $('<div class="processlabel">'+ (day.label || '') +'</div>')
 
                                     $div.css({
                                         top: top,
@@ -1127,7 +1141,6 @@
                                     });
 
                                     $div.append(_bar);
-                                    $div.append(_elapsedBar);
                                     $div.append($label);
 
                                     datapanel.append($div);
