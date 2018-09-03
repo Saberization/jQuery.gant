@@ -236,11 +236,36 @@
     color: #333 !important;
 }
 
+.fn-gantt .processlabel {
+    position: absolute;
+    top: 0;
+    height: 18px;
+    line-height: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    color: #414B57 !important;
+    text-align: center;
+    font-size: 11px;
+    z-index: 30;
+}
+
 .fn-gantt .overdue,
 .fn-gantt .elapsed {
     position: absolute;
     top: 0;
-    height: 100%;
+    height: 18px;
+    margin: 0 3px 3px 0;
+    z-index: 20;
+    text-align: center;
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.25) inset;
+    -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.25) inset;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 .fn-gantt .elapsed {

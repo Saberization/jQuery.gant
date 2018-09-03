@@ -973,15 +973,17 @@
 
             // **Progress Bar** TODO:
             // Return an element representing a progress of position within the entire chart
-            createProgressBar: function (label, desc, classNames, dataObj, overdueDay, elapsedDay) {
+            createProgressBar: function (label, desc, classNames, dataObj) {
                 var $rowheader = $('.leftPanel').find('#rowheader' + idx++);
 
                 leftPanelHeight.push(leftPanelHeight.length == 0 ? $rowheader.outerHeight() : leftPanelHeight[leftPanelHeight.length - 1] + $rowheader.outerHeight());
                 leftRowHeight = $rowheader.outerHeight();
 
                 label = label || "";
-                var bar = $('<div class="bar"><div class="fn-label">' + label + '</div></div>')
+                var bar = $('<div class="bar"></div>')
                     .data("dataObj", dataObj);
+                // var bar = $('<div class="bar"><div class="fn-label">' + label + '</div></div>')
+                //     .data("dataObj", dataObj);
                 if (desc) {
                     bar
                         .mouseenter(function (e) {
@@ -1001,16 +1003,6 @@
                 }
                 if (classNames) {
                     bar.addClass(classNames);
-                }
-
-                // 已经过时间，显示为绿色
-                if (elapsedDay) {
-                    bar.append('<div class="elapsed" style="width: ' + elapsedDay + 'px"></div>');
-                }
-
-                // 处理超时，显示为红色
-                if (overdueDay) {
-                    bar.append('<div class="overdue" style="width: ' + overdueDay + 'px"></div>');
                 }
 
                 bar.click(function (e) {
@@ -1068,14 +1060,15 @@
                         $.each(entry.values, function (j, day) {
                             var _bar;
                             var from, to, cFrom, cTo, dFrom, dTo, dl, dp;
+                            var elapsedDay, elapsedDaydTo, elapsedDayTo, elapsedDaycTo, elapsedDayDl, elapsedDayDp;
+                            var overdueDay, overdueDaydTo, overdueDayTo, overdueDaycTo, overdueDayDl, overdueDayDp;
                             var topEl, top;
+                            var _elapsedBar;
                             switch (settings.scale) {
                                 // **Weekly data**
                                 case "weeks":
                                     dFrom = tools.dateDeserialize(day.from);
                                     dTo = tools.dateDeserialize(day.to);
-
-                                    console.log(dFrom, dTo);
 
                                     from = $(element).find("#" + dFrom.getWeekId());
                                     cFrom = from.data("offset");
@@ -1084,7 +1077,7 @@
                                     dl = Math.round((cTo - cFrom) / cellWidth) + 1;
                                     dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
 
-                                    _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overdueDay, day.elapsedDay);
+                                    _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj);
 
                                     // find row
                                     topEl = $(element).find("#rowheader" + i);
@@ -1092,13 +1085,52 @@
                                     top = leftPanelHeight[i] + spacerHeight - leftRowHeight / 2 - 9;
                                     top = (beforeSwitchScale && beforeSwitchScale == 'days') ? top - 12 : top;
 
+                                    if (day.elapsedDay) {
+                                        elapsedDay = +dFrom + day.elapsedDay * 24 * 60 * 60 * 1000;
+                                        elapsedDaydTo = tools.dateDeserialize('/Date(' + elapsedDay + ')/');
+                                        elapsedDayTo = $(element).find("#" + elapsedDaydTo.getWeekId());
+                                        elapsedDaycTo = elapsedDayTo.data("offset");
+                                        elapsedDayDl = Math.round((elapsedDaycTo - cFrom) / cellWidth) + 1;
+                                        elapsedDayDp = 100 * (cellWidth * elapsedDayDl - 1) / dataPanelWidth;
+
+                                        _elapsedBar = $('<div class="elapsed"></div>');
+                                        _elapsedBar.css({
+                                            top: top,
+                                            left: Math.floor(cFrom),
+                                            width: elapsedDayDp + '%'
+                                        });
+                                    }
+
+                                    if (day.overdueDay) {
+
+                                    }
+
                                     _bar.css({
                                         top: top,
                                         left: Math.floor(cFrom),
                                         width: dp + '%'
                                     });
 
-                                    datapanel.append(_bar);
+                                    var $div = $('<div></div>');
+                                    var $label = $('<div class="processlabel">'+ (day.label || '') +'</div>')
+
+                                    $div.css({
+                                        top: top,
+                                        left: Math.floor(cFrom),
+                                        width: dp + '%'
+                                    });
+
+                                    $label.css({
+                                        top: top,
+                                        left: Math.floor(cFrom),
+                                        width: dp + '%'
+                                    });
+
+                                    $div.append(_bar);
+                                    $div.append(_elapsedBar);
+                                    $div.append($label);
+
+                                    datapanel.append($div);
                                     break;
 
                                     // **Days**
