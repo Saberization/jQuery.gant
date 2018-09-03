@@ -1,17 +1,24 @@
 {
     "list": [{
-        "name": "节点一",
+        "name": "新增节点一",
         "startDate": "2018-04-01",
         "endDate": "2018-08-01",
         "overdueDay": 29,
         "finishPer": "40%",
         "elapsedDay": 123
     }, {
-        "name": "节点二",
-        "startDate": "2018-10-01",
+        "name": "新增节点二",
+        "startDate": "2018-05-01",
+        "endDate": "2018-09-30",
+        "overdueDay": 0,
+        "finishPer": "60%",
+        "elapsedDay": 122
+    }, {
+        "name": "新增节点三",
+        "startDate": "2018-06-01",
         "endDate": "2018-11-30",
         "overdueDay": 0,
-        "finishPer": "40%",
-        "elapsedDay": 0
+        "finishPer": "60%",
+        "elapsedDay": 91
     }]
 }

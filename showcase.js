@@ -2,7 +2,7 @@
  * @Author: guotq
  * @Date: 2018-08-03 16:07:12
  * @Last Modified by: guotq
- * @Last Modified time: 2018-08-17 10:35:15
+ * @Last Modified time: 2018-09-03 14:17:36
  * @Description: 甘特图数据
  */
 
@@ -63,8 +63,8 @@
                             to: getDateTime(endTimeMilliseconds),
                             label: item.finishPer,
                             customClass: 'default',
-                            overdueWidth: overdueDay * 24,
-                            elapsedWidth: item.elapsedDay * 24
+                            overdueDay: overdueDay,
+                            elapsedDay: item.elapsedDay
                         }]
                     });
                 }

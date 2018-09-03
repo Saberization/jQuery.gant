@@ -885,16 +885,16 @@
                                             core.navigateTo(element, tools.getCellSize() * -3);
                                         }
                                     }))
-                                .append($('<button type="button" class="nav-link nav-zoomIn"/>')
-                                    .html('&#43;')
-                                    .click(function () {
-                                        core.zoomInOut(element, -1);
-                                    }))
-                                .append($('<button type="button" class="nav-link nav-zoomOut"/>')
-                                    .html('&#45;')
-                                    .click(function () {
-                                        core.zoomInOut(element, 1);
-                                    }))
+                                // .append($('<button type="button" class="nav-link nav-zoomIn"/>')
+                                //     .html('&#43;')
+                                //     .click(function () {
+                                //         core.zoomInOut(element, -1);
+                                //     }))
+                                // .append($('<button type="button" class="nav-link nav-zoomOut"/>')
+                                //     .html('&#45;')
+                                //     .click(function () {
+                                //         core.zoomInOut(element, 1);
+                                //     }))
                                 // TODO: 去掉下一周
                                 // .append($('<button type="button" class="nav-link nav-next-week"/>')
                                 //         .html('&gt;&gt;')
@@ -973,7 +973,7 @@
 
             // **Progress Bar** TODO:
             // Return an element representing a progress of position within the entire chart
-            createProgressBar: function (label, desc, classNames, dataObj, overdueWidth, elapsedWidth) {
+            createProgressBar: function (label, desc, classNames, dataObj, overdueDay, elapsedDay) {
                 var $rowheader = $('.leftPanel').find('#rowheader' + idx++);
 
                 leftPanelHeight.push(leftPanelHeight.length == 0 ? $rowheader.outerHeight() : leftPanelHeight[leftPanelHeight.length - 1] + $rowheader.outerHeight());
@@ -1004,13 +1004,13 @@
                 }
 
                 // 已经过时间，显示为绿色
-                if (elapsedWidth) {
-                    bar.append('<div class="elapsed" style="width: ' + elapsedWidth + 'px"></div>');
+                if (elapsedDay) {
+                    bar.append('<div class="elapsed" style="width: ' + elapsedDay + 'px"></div>');
                 }
 
                 // 处理超时，显示为红色
-                if (overdueWidth) {
-                    bar.append('<div class="overdue" style="width: ' + overdueWidth + 'px"></div>');
+                if (overdueDay) {
+                    bar.append('<div class="overdue" style="width: ' + overdueDay + 'px"></div>');
                 }
 
                 bar.click(function (e) {
@@ -1075,13 +1075,16 @@
                                     dFrom = tools.dateDeserialize(day.from);
                                     dTo = tools.dateDeserialize(day.to);
 
+                                    console.log(dFrom, dTo);
+
                                     from = $(element).find("#" + dFrom.getWeekId());
                                     cFrom = from.data("offset");
                                     to = $(element).find("#" + dTo.getWeekId());
                                     cTo = to.data("offset");
                                     dl = Math.round((cTo - cFrom) / cellWidth) + 1;
                                     dp = 100 * (cellWidth * dl - 1) / dataPanelWidth;
-                                    _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, parseInt(day.overdueWidth, 10) / 4, parseInt(day.elapsedWidth, 10) / 7);
+
+                                    _bar = core.createProgressBar(day.label, day.desc, day.customClass, day.dataObj, day.overdueDay, day.elapsedDay);
 
                                     // find row
                                     topEl = $(element).find("#rowheader" + i);
