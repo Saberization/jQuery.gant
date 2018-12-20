@@ -1,52 +1,28 @@
 {
-    "list": [{
-        "name": "新增节点一",
-        "startDate": "2018-04-01",
-        "endDate": "2018-08-01",
-        "overdueDay": 29,
-        "finishPer": "40%",
-        "elapsedDay": 123
-    }, {
-        "name": "新增节点二",
-        "startDate": "2018-05-01",
-        "endDate": "2018-09-30",
-        "overdueDay": 0,
-        "finishPer": "60%",
-        "elapsedDay": 122
-    }, {
-        "name": "新增节点三",
-        "startDate": "2018-06-01",
-        "endDate": "2018-11-30",
-        "overdueDay": 0,
-        "finishPer": "60%",
-        "elapsedDay": 91
-    }, {
-        "name": "新增节点四",
-        "startDate": "2018-02-01",
-        "endDate": "2018-05-31",
-        "overdueDay": 95,
-        "finishPer": "30%",
-        "elapsedDay": 119
-    }, {
-        "name": "新增节点五",
-        "startDate": "2018-03-01",
-        "endDate": "2018-06-30",
-        "overdueDay": 65,
-        "finishPer": "40%",
-        "elapsedDay": 121
-    }, {
-        "name": "新增节点六",
-        "startDate": "2018-05-01",
-        "endDate": "2018-08-31",
-        "overdueDay": 3,
-        "finishPer": "50%",
-        "elapsedDay": 122
-    }, {
-        "name": "新增节点七",
-        "startDate": "2018-07-01",
-        "endDate": "2018-12-31",
-        "overdueDay": 0,
-        "finishPer": "50%",
-        "elapsedDay": 64
-    }]
+    "list": [
+        {
+            "finishPer": "100%",
+            "endDate": "2018-09-01",
+            "name": "001",
+            "overdueDay": 110,
+            "startDate": "2018-05-01",
+            "elapsedDay": 0
+        },
+        {
+            "finishPer": "80%",
+            "endDate": "2018-12-31",
+            "name": "002",
+            "overdueDay": 0,
+            "startDate": "2018-10-01",
+            "elapsedDay": 80
+        },
+        {
+            "finishPer": "80%",
+            "endDate": "2018-11-15",
+            "name": "003",
+            "overdueDay": 35,
+            "startDate": "2018-09-01",
+            "elapsedDay": 75
+        }
+    ]
 }

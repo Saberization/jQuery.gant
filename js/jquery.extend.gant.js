@@ -340,8 +340,9 @@
 
                 var entries = [];
                 $.each(element.data, function (i, entry) {
-                    if (i >= element.pageNum * settings.itemsPerPage &&
-                        i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
+                    // TODO:
+                    // i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)
+                    if (i >= element.pageNum * settings.itemsPerPage) {
                         var dataId = ('id' in entry) ? '" data-id="' + entry.id : '';
                         entries.push(
                             '<div class="row name row' + i +
@@ -811,12 +812,12 @@
                                     }))
                                 .append($('<div class="page-number"/>')
                                     .append($('<span/>')
-                                        .html(element.pageNum + 1 + ' / ' + element.pageCount)))
+                                        .html(element.pageNum + 1 + ' / ' + 1)))
                                 .append($('<button type="button" class="nav-link nav-page-next"/>')
-                                    .html('&darr;')
-                                    .click(function () {
-                                        core.navigatePage(element, 1);
-                                    }))
+                                    .html('&darr;'))
+                                    // .click(function () {
+                                    //     core.navigatePage(element, 1);
+                                    // }))
                                 .append($('<button type="button" class="nav-link nav-now"/>')
                                     .html('&#9679;')
                                     .click(function () {
@@ -924,12 +925,12 @@
                             }))
                         .append($('<div class="page-number"/>')
                             .append($('<span/>')
-                                .html(element.pageNum + 1 + ' / ' + element.pageCount)))
+                                .html(element.pageNum + 1 + ' / ' + 1)))
                         .append($('<button type="button" class="nav-link nav-page-next"/>')
-                            .html('&darr;')
-                            .click(function () {
-                                core.navigatePage(element, 1);
-                            }))
+                            .html('&darr;'))
+                            // .click(function () {
+                            //     core.navigatePage(element, 1);
+                            // }))
                         .append($('<button type="button" class="nav-link nav-begin"/>')
                             .html('&#124;&lt;')
                             .click(function () {
@@ -1054,9 +1055,9 @@
                 };
                 // Loop through the values of each data element and set a row TODO: 改过源代码
                 $.each(element.data, function (i, entry) {
-                    if (i >= element.pageNum * settings.itemsPerPage &&
-                        i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
-
+                    // TODO:
+                    // i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)
+                    if (i >= element.pageNum * settings.itemsPerPage) {
                         $.each(entry.values, function (j, day) {
                             var _bar;
                             var from, to, cFrom, cTo, dFrom, dTo, dl, dp;
@@ -1087,7 +1088,7 @@
                                     var $div = $('<div></div>'),
                                         $label = $('<div class="processlabel">'+ (day.label || '') +'</div>');
 
-                                    if (day.elapsedDay) {
+                                    if (typeof day.elapsedDay === 'number') {
                                         elapsedDay = +dFrom + day.elapsedDay * 24 * 60 * 60 * 1000;
                                         elapsedDaydTo = tools.dateDeserialize('/Date(' + elapsedDay + ')/');
                                         elapsedDayTo = $(element).find("#" + elapsedDaydTo.getWeekId());
@@ -1105,7 +1106,7 @@
                                         $div.append(_elapsedBar);
                                     }
 
-                                    if (day.overdueDay) {
+                                    if (typeof day.overdueDay === 'number') {
                                         var overdueDaydFrom = elapsedDaydTo,
                                             overdueDayFrom = $(element).find("#" + overdueDaydFrom.getWeekId()),
                                             overdueDaycFrom = overdueDayFrom.data("offset"),
