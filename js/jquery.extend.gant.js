@@ -1088,7 +1088,7 @@
                                     var $div = $('<div></div>'),
                                         $label = $('<div class="processlabel">'+ (day.label || '') +'</div>');
 
-                                    if (typeof day.elapsedDay === 'number') {
+                                    if (typeof day.elapsedDay === 'number' && day.elapsedDay !== 0) {
                                         elapsedDay = +dFrom + day.elapsedDay * 24 * 60 * 60 * 1000;
                                         elapsedDaydTo = tools.dateDeserialize('/Date(' + elapsedDay + ')/');
                                         elapsedDayTo = $(element).find("#" + elapsedDaydTo.getWeekId());
@@ -1106,8 +1106,8 @@
                                         $div.append(_elapsedBar);
                                     }
 
-                                    if (typeof day.overdueDay === 'number') {
-                                        var overdueDaydFrom = elapsedDaydTo,
+                                    if (typeof day.overdueDay === 'number' && day.overdueDay !== 0) {
+                                        var overdueDaydFrom = elapsedDaydTo ? elapsedDaydTo : tools.dateDeserialize('/Date(' + (+dFrom + 0 * 24 * 60 * 60 * 1000) + ')/'),
                                             overdueDayFrom = $(element).find("#" + overdueDaydFrom.getWeekId()),
                                             overdueDaycFrom = overdueDayFrom.data("offset"),
                                             overdueDayDl = Math.round((cTo - overdueDaycFrom) / cellWidth) + 1,
