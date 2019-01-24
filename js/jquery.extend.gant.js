@@ -606,8 +606,6 @@
                             rday = range[i];
                             year = rday.getFullYear();
 
-                            // console.log(year, rday, week > (week = rday.getWeekOfYear()));
-
                             // Fill years
                             if (week > (week = rday.getWeekOfYear())) {
                                 // partial weeks to subtract from year header

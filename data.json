@@ -1,27 +1,20 @@
 {
-    "list": [{
-            "finishPer": "80%",
-            "endDate": "2018-11-15",
+    "list": [
+        {
+            "finishPer": "100%",
+            "endDate": "2019-06-01",
             "name": "001",
-            "overdueDay": 46,
-            "startDate": "2018-09-01",
-            "elapsedDay": 75
+            "overdueDay": 0,
+            "startDate": "2019-02-01",
+            "elapsedDay": -7
         },
         {
             "finishPer": "100%",
-            "endDate": "2018-12-31",
+            "endDate": "2019-10-01",
             "name": "002",
             "overdueDay": 0,
-            "startDate": "2018-07-01",
-            "elapsedDay": 172
-        },
-        {
-            "finishPer": "100%",
-            "endDate": "2018-12-20",
-            "name": "003",
-            "overdueDay": 0,
-            "startDate": "2018-05-01",
-            "elapsedDay": 233
+            "startDate": "2019-06-01",
+            "elapsedDay": -127
         }
     ]
 }
