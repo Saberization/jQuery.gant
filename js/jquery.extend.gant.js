@@ -1116,8 +1116,6 @@
                                             overdueDayDl = Math.round((cTo - overdueDaycFrom) / cellWidth) + 1,
                                             overdueDayDp = 100 * (cellWidth * overdueDayDl - 1) / dataPanelWidth;
 
-                                        console.log(overdueDaydFrom, overdueDaydFrom, overdueDaycFrom, overdueDayDl, overdueDayDp);
-
                                         _overdueBar = $('<div class="overdue"></div>');
                                         _overdueBar.css({
                                             top: top,
