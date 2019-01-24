@@ -604,6 +604,9 @@
 
                         for (i = 0, len = range.length; i < len; i++) {
                             rday = range[i];
+                            year = rday.getFullYear();
+
+                            // console.log(year, rday, week > (week = rday.getWeekOfYear()));
 
                             // Fill years
                             if (week > (week = rday.getWeekOfYear())) {
